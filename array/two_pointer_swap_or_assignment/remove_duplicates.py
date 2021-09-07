@@ -11,15 +11,10 @@ class RemoveDuplicates:
 
         """
         self.array = [1, 1, 1, 2, 3, 4, 4, 7]
-        """
-        
-        """
 
     def run(self):
         print(self.__class__.__name__)
         self.dedup()
-        assert len(self.array) == 8
-        assert self.array[1] == 2
         print(f"result_array: {self.array}")
 
     def dedup(self):
