@@ -10,11 +10,31 @@ class RemoveDuplicates:
         *   3. 除了被 remove 掉的元素之外，其他元素的相对顺序不能变。
 
         """
-        pass
+        self.array = [1, 1, 1, 2, 3, 4, 4, 7]
+        """
+        
+        """
 
     def run(self):
         print(self.__class__.__name__)
+        self.dedup()
+        assert len(self.array) == 8
+        assert self.array[1] == 2
+        print(f"result_array: {self.array}")
 
+    def dedup(self):
+        start_index = 0
+        for current_index in range(1, len(self.array)):
+            if self.array[start_index] >= self.array[current_index]:
+                temp_idx = current_index
+                while temp_idx < len(self.array):
+                    if self.array[start_index] < self.array[temp_idx]:
+                        break
+                    else:
+                        temp_idx = temp_idx + 1
+                if temp_idx < len(self.array):
+                    self.array[current_index] = self.array[temp_idx]
+            start_index += 1
 
 
 if __name__ == '__main__':
