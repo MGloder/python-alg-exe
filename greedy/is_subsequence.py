@@ -38,8 +38,19 @@ class IsSubSequence:
                 return False
         return False
 
+    def is_subsequence_dp(self, s, t):
+        array = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]
+        for s_i in range(0, len(s)):
+            for t_i in range(s_i, len(t)):
+                current = 1 if t[t_i] == s[s_i] and s_i < t_i else 0
+                array[s_i + 1][t_i + 1] = current + max(max(array[s_i][t_i], array[s_i][t_i + 1]), array[s_i + 1][t_i])
+        return array[len(s)][len(t)] == len(s)
+
     def run(self):
-        pass
+        ## two pointer
+        print(f"{self.is_subsequence('abc', 'ahbgdc')}")
+        ## dp
+        print(f"{self.is_subsequence_dp('bb', 'abcd')}")
 
 
 if __name__ == '__main__':
