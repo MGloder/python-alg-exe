@@ -1,26 +1,34 @@
 class Solution:
     def getMinSwaps(self, num: str, k: int) -> int:
-        def next_permutation(num):
-            for index_from_back in range(len(num) - 1, 0, -1):
-                if num[index_from_back] > num[index_from_back - 1]:
-                    index_from_back_str = ''.join(sorted(num[index_from_back:]))
-                    print(index_from_back_str)
-                    swapped_str = index_from_back_str[0] + num[index_from_back - 1] + index_from_back_str[1:]
-                    num = num[:index_from_back - 1] + swapped_str
-                    return num
+        def next_permutation(nums):
+            if len(nums) < 1:
+                return nums
 
-            return num[::-1]
+            for index_from_back in range(len(nums) - 1, 0, -1):
+                if nums[index_from_back - 1] < nums[index_from_back]:
+                    to_be_replaced = nums[index_from_back - 1]
+                    for i1 in range(index_from_back, len(nums)):
+                        for i2 in range(i1 + 1, len(nums)):
+                            if nums[i1] > nums[i2]:
+                                temp = nums[i2]
+                                nums[i2] = nums[i1]
+                                nums[i1] = temp
 
-        original_num = num
-        for num_of_run in range(0, k):
-            num = next_permutation(num)
+                    for index in range(index_from_back, len(nums)):
+                        if to_be_replaced < nums[index]:
+                            temp = nums[index]
+                            nums[index] = nums[index_from_back - 1]
+                            nums[index_from_back - 1] = temp
+                            return nums
+                    return nums
 
-        orig = list(original_num)
+        orig = list(num)
         nums = list(num)
+        for num_of_run in range(0, k):
+            nums = next_permutation(nums)
+
         i = 0
         count = 0
-        print(orig)
-        print(nums)
 
         while i < len(nums):
             if nums[i] == orig[i]:
