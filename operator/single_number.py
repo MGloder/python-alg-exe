@@ -23,15 +23,7 @@ class Solution:
     """
 
     def singleNumber(self, nums: List[int]) -> int:
-        dic = {}
+        res = 0
         for num in nums:
-            if num not in dic:
-                dic[num] = 1
-            else:
-                dic[num] = dic[num] + 1
-
-        for key in dic:
-            if dic[key] == 1:
-                return key
-
-        return 0
+            res = res ^ num
+        return res
